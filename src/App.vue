@@ -261,10 +261,12 @@
               Start Recording
             </button>
             <div v-else>
+              <div v-if="mediaStatus">
+              
               <button
                 type="button"
                 v-if="showResume"
-                class="btn btn-outline-danger m-2"
+                class="btn btn-outline-danger btn-sm m-2"
                 @click.prevent="pauseVideo()"
               >
                 Pause
@@ -272,21 +274,25 @@
               <button
                 type="button"
                 v-else
-                class="btn btn-outline-success m-2"
+                class="btn btn-outline-success btn-sm m-2"
                 @click.prevent="resumeVideo()"
               >
                 Resume
               </button>
               <button
                 type="button"
-                class="btn btn-danger m-2"
+                class="btn btn-danger btn-sm m-2"
                 @click.prevent="stopVideo()"
               >
                 Stop Recording
               </button>
+              </div>
+              <div v-else>
+
+              
               <button
                 type="button"
-                class="btn btn-success m-2"
+                class="btn btn-success btn-sm m-2"
                 @click.prevent="submitVideo()"
                 :disabled="isSaveDisabled"
                 id="btnSave"
@@ -295,13 +301,14 @@
               </button>
               <button
                 type="button"
-                class="btn btn-primary m-2"
+                class="btn btn-primary btn-sm m-2"
                 @click.prevent="retakeVideo()"
                 :disabled="isRetakeDisabled"
                 id="btnRetake"
               >
                 Retake
               </button>
+              </div>
             </div>
           </div>
 
@@ -661,6 +668,7 @@ export default {
       displayRecord: true,
       showModal: true,
       showResume: true,
+      mediaStatus : true,
       recordStart: true,
       allMedia: [
         {
@@ -811,6 +819,7 @@ export default {
     retakeVideo() {
       this.isSaveDisabled = true;
       this.isRetakeDisabled = true;
+      this.mediaStatus = true;
       this.retake += 1;
       this.player.record().start();
     },
@@ -824,6 +833,7 @@ export default {
     },
     stopVideo() {
       this.player.record().stop();
+      this.mediaStatus = false
     },
   },
   beforeDestroy() {
