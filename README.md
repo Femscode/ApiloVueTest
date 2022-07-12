@@ -1,4 +1,4 @@
-# live-chat
+# Apilo Test
 
 ## Project setup
 ```
